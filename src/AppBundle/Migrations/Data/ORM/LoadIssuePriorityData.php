@@ -11,11 +11,11 @@ class LoadIssuePriorityData extends AbstractFixture
 {
     /** @var array */
     protected $data = [
-        'Blocker' => false,
-        'Major' => true,
+        'Trivial'  => false,
+        'Minor'    => false,
+        'Major'    => true,
         'Critical' => false,
-        'Minor' => false,
-        'Trivial' => false
+        'Blocker'  => false,
     ];
 
     /**

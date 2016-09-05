@@ -137,7 +137,7 @@ class AppBundleInstaller implements Installation, ExtendExtensionAwareInterface,
             $schema->getTable('oro_user'),
             ['assignee_id'],
             ['id'],
-            ['onDelete' => 'CASCADE', 'onUpdate' => null]
+            ['onDelete' => 'SET NULL', 'onUpdate' => null]
         );
         $table->addForeignKeyConstraint(
             $schema->getTable($this->issueTableName),
@@ -149,7 +149,7 @@ class AppBundleInstaller implements Installation, ExtendExtensionAwareInterface,
             $schema->getTable('oro_user'),
             ['reporter_id'],
             ['id'],
-            ['onDelete' => 'CASCADE', 'onUpdate' => null]
+            ['onDelete' => 'SET NULL', 'onUpdate' => null]
         );
     }
 

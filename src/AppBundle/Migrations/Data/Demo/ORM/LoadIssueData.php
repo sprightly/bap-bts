@@ -27,6 +27,8 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         /** @var EnumValueRepository $priorityRepository */
         $priorityRepository = $manager->getRepository($priorityClassName);
         $majorPriority = $priorityRepository->findOneById('major');
+        $blockerPriority = $priorityRepository->findOneById('blocker');
+        $trivialPriority = $priorityRepository->findOneById('trivial');
 
         $resolutionClassName = ExtendHelper::buildEnumValueClassName('issue_resolution');
         /** @var EnumValueRepository $resolutionRepository */
@@ -90,7 +92,7 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         );
         $openSubTask->setCode('APB-3');
         $openSubTask->setType($subtaskType);
-        $openSubTask->setPriority($majorPriority);
+        $openSubTask->setPriority($trivialPriority);
         $openSubTask->setUpdatedAt(new \DateTime('2016-07-03 19:11:31'));
         $openSubTask->setCreatedAt(new \DateTime('2016-07-01 18:15:31'));
         $openSubTask->setAssignee($this->getReference('usual-user'));
@@ -113,7 +115,7 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         );
         $closedSubTask->setCode('APB-4');
         $closedSubTask->setType($subtaskType);
-        $closedSubTask->setPriority($majorPriority);
+        $closedSubTask->setPriority($blockerPriority);
         $closedSubTask->setResolution($fixedResolution);
         $closedSubTask->setUpdatedAt(new \DateTime('2016-07-05 10:11:31'));
         $closedSubTask->setCreatedAt(new \DateTime('2016-07-04 12:11:31'));

@@ -1,0 +1,97 @@
+datagrid:
+    app-issues-grid:
+        extended_entity_name: AppBundle:Issue
+        source:
+            type: orm
+            query:
+                select:
+                    - issue.code
+                    - issue.summary
+                    - typeEnum.name as issueType
+                    - priorityEnum.name as issuePriority
+                    - resolutionEnum.name as issueResolution
+                    - reporter.username as reporterUsername
+                    - assignee.username as assigneeUsername
+                    - issue.createdAt
+                    - issue.updatedAt
+                from:
+                    - { table: AppBundle:Issue, alias: issue }
+                join:
+                    left:
+                        - { join: issue.priority, alias: priorityEnum }
+                        - { join: issue.type, alias: typeEnum }
+                        - { join: issue.resolution, alias: resolutionEnum }
+                        - { join: issue.assignee, alias: assignee }
+                        - { join: issue.reporter, alias: reporter }
+        columns:
+            code:
+                label: Code
+            summary:
+                label: Summary
+            type:
+                label: Type
+            priority:
+                label: Priority
+            resolution:
+                label: Resolution
+            reporterUsername:
+                label: Reporter
+            assigneeUsername:
+                label: Assignee
+            createdAt:
+                label: Created
+                frontend_type: datetime
+            updatedAt:
+                label: Updated
+                frontend_type: datetime
+        sorters:
+            columns:
+                code:
+                    data_name: issue.code
+                summary:
+                    data_name: issue.summary
+                type:
+                    data_name: issueType
+                priority:
+                    data_name: issuePriority
+                resolution:
+                    data_name: issueResolution
+                reporterUsername:
+                    data_name: reporterUsername
+                assigneeUsername:
+                    data_name: assigneeUsername
+                createdAt:
+                    data_name: issue.createdAt
+                updatedAt:
+                    data_name: issue.updatedAt
+            default:
+                updatedAt: DESC
+        filters:
+            columns:
+                code:
+                    type: string
+                    data_name: issue.code
+                summary:
+                    type: string
+                    data_name: issue.summary
+                type:
+                    type: string
+                    data_name: issueType
+                priority:
+                    type: string
+                    data_name: issuePriority
+                resolution:
+                    type: string
+                    data_name: issueResolution
+                reporterUsername:
+                    type: string
+                    data_name: reporterUsername
+                assigneeUsername:
+                    type: string
+                    data_name: assigneeUsername
+                createdAt:
+                    type: datetime
+                    data_name: issue.createdAt
+                updatedAt:
+                    type: datetime
+                    data_name: issue.updatedAt

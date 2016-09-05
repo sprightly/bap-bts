@@ -66,7 +66,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id", onDelete="SET NULL")
      *
      * @var User
      */
@@ -74,7 +74,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id", onDelete="SET NULL")
      *
      * @var User
      */
