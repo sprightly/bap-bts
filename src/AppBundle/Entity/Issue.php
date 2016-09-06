@@ -17,6 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="app_issue")
  * @Config(
  *     defaultValues={
+ *          "security"={
+ *              "type"="acl"
+ *          },
  *          "tag"={
  *              "enabled"=true
  *          }

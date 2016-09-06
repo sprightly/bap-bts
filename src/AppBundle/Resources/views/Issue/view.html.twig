@@ -1,0 +1,69 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+    'entity':      entity,
+    'indexPath':   path('app_issue_index'),
+    'indexLabel': 'Issues'|trans,
+    'entityTitle': entity.summary
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% set data %}
+        <div class="widget-content">
+            <div class="row-fluid form-horizontal">
+                <div class="responsive-block">
+                    {{ UI.renderProperty('Code'|trans, entity.code) }}
+                    {{ UI.renderProperty('Summary'|trans, entity.summary) }}
+                    {{ UI.renderProperty('Type'|trans, entity.type) }}
+                    {{ UI.renderProperty('Priority'|trans, entity.priority) }}
+                    {% if entity.resolution is not empty %}
+                        {{ UI.renderProperty('Resolution'|trans, entity.resolution) }}
+                    {% endif %}
+                    {{ UI.renderHtmlProperty('Assignee'|trans, UI.entityViewLink(entity.assignee, entity.assignee.username, 'oro_user_view')) }}
+                    {{ UI.renderHtmlProperty('Reporter'|trans, UI.entityViewLink(entity.reporter, entity.reporter.username, 'oro_user_view')) }}
+                    {{ UI.renderProperty('Created'|trans, entity.createdAt|date) }}
+                    {{ UI.renderProperty('Updated'|trans, entity.updatedAt|date) }}
+                    {% if entity.parent is not empty %}
+                        {{ UI.renderHtmlProperty('Story'|trans, UI.entityViewLink(entity.parent, entity.parent.summary, 'app_issue_view')) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endset %}
+    {% set dataBlocks = [
+        {
+            'title': 'Data'|trans,
+            'class': 'active',
+            'subblocks': [
+                { 'data' : [data] }
+            ]
+        }
+    ] %}
+    {% if entity.children is not empty %}
+        {% set dataBlocks = dataBlocks|merge([
+            {
+                'title': 'Sub-tasks'|trans,
+                'subblocks': [
+                    { 'data' : [dataGrid.renderGrid('app-issue-subtasks-grid', {issueId: entity.id})] }
+                ]
+            }
+        ]) %}
+    {% endif %}
+    {% set dataBlocks = dataBlocks|merge([
+        {
+            'title': 'Collaborators'|trans,
+            'subblocks': [
+                { 'data' : [dataGrid.renderGrid('app-issue-collaborators-grid', {issueId: entity.id})] }
+            ]
+        }
+    ]) %}
+
+    {% set id = 'issueView' %}
+    {% set data = { 'dataBlocks': dataBlocks } %}
+    {{ parent() }}
+{% endblock content_data %}

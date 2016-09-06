@@ -1,10 +1,14 @@
 datagrid:
     app-issues-grid:
         extended_entity_name: AppBundle:Issue
+        options:
+            entity_pagination: true
         source:
+            acl_resource: app_issue_view
             type: orm
             query:
                 select:
+                    - issue.id
                     - issue.code
                     - issue.summary
                     - typeEnum.name as issueType
@@ -44,6 +48,21 @@ datagrid:
             updatedAt:
                 label: Updated
                 frontend_type: datetime
+        properties:
+            id: ~
+            view_link:
+                type: url
+                route: app_issue_view
+                params:
+                    - id
+        actions:
+            view:
+                type:          navigate
+                label:         View
+                link:          view_link
+                icon:          eye-open
+                acl_resource:  app_issue_view
+                rowAction:     true
         sorters:
             columns:
                 code:
@@ -95,3 +114,58 @@ datagrid:
                 updatedAt:
                     type: datetime
                     data_name: issue.updatedAt
+    app-issue-collaborators-grid:
+        source:
+            acl_resource: oro_user_view
+            type: orm
+            query:
+                select:
+                    - user.id
+                    - user.username
+                    - user.firstName
+                    - user.lastName
+                from:
+                    - { table: AppBundle:Issue, alias: issue }
+                join:
+                    left:
+                        - { join: issue.collaborators, alias: user }
+
+                where:
+                    and:
+                        - issue.id = :issueId
+            bind_parameters:
+                - issueId
+        columns:
+            username:
+                label: Username
+            firstName:
+                label: First Name
+            lastName:
+                label: Last Name
+        properties:
+            id: ~
+            view_link:
+                type: url
+                route: oro_user_view
+                params:
+                    - id
+        actions:
+            view:
+                type:          navigate
+                label:         View
+                link:          view_link
+                icon:          eye-open
+                acl_resource:  oro_user_view
+                rowAction:     true
+    app-issue-subtasks-grid:
+        extends: app-issues-grid
+        source:
+            query:
+                join:
+                    left:
+                        - { join: issue.parent, alias: parent }
+                where:
+                    and:
+                        - parent.id = :issueId
+            bind_parameters:
+                - issueId

@@ -19,6 +19,13 @@
 'Issues': 'Issues'
 'Code': 'Code'
 'Summary': 'Summary'
+'Data': 'Data'
+'View': 'View'
+'Collaborators': 'Collaborators'
+'Sub-tasks': 'Sub-tasks'
+'Type': 'Type'
+'Priority': 'Priority'
+'Resolution': 'Resolution'
 
 app:
   issue:
