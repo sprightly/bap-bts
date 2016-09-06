@@ -26,6 +26,8 @@
 'Type': 'Type'
 'Priority': 'Priority'
 'Resolution': 'Resolution'
+'Issues where user is assignee': 'Issues where user is assignee'
+'Issues where user is reporter': 'Issues where user is reporter'
 
 app:
   issue:

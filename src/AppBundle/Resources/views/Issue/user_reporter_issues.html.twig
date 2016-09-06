@@ -1,0 +1,13 @@
+{% if resource_granted('app_issue_view') %}
+    {% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+    <div class="row-fluid">
+        <div class="box-type1">
+            <div class="title">
+                <span class="widget-title">{{ "Issues where user is reporter"|trans }}</span>
+            </div>
+            <div class="row-fluid">
+                {{ dataGrid.renderGrid('app-reporter-issues-grid', {userId: entity.id}) }}
+            </div>
+        </div>
+    </div>
+{% endif %}

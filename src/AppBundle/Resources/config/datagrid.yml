@@ -169,3 +169,33 @@ datagrid:
                         - parent.id = :issueId
             bind_parameters:
                 - issueId
+        sorters: ~
+        filters: ~
+    app-assignee-issues-grid:
+        extends: app-issues-grid
+        source:
+            query:
+                join:
+                    left:
+                        - { join: issue.assignee, alias: user }
+                where:
+                    and:
+                        - user.id = :userId
+            bind_parameters:
+                - userId
+        sorters: ~
+        filters: ~
+    app-reporter-issues-grid:
+        extends: app-issues-grid
+        source:
+            query:
+                join:
+                    left:
+                        - { join: issue.reporter, alias: user }
+                where:
+                    and:
+                        - user.id = :userId
+            bind_parameters:
+                - userId
+        sorters: ~
+        filters: ~

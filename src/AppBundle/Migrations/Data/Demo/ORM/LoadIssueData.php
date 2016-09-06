@@ -96,9 +96,10 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $openSubTask->setUpdatedAt(new \DateTime('2016-07-03 19:11:31'));
         $openSubTask->setCreatedAt(new \DateTime('2016-07-01 18:15:31'));
         $openSubTask->setAssignee($this->getReference('usual-user'));
-        $openSubTask->setReporter($this->getReference('admin-user'));
+        $openSubTask->setReporter($this->getReference('another-usual-user'));
         $openSubTask->addCollaborator($this->getReference('usual-user'));
         $openSubTask->addCollaborator($this->getReference('admin-user'));
+        $openSubTask->addCollaborator($this->getReference('another-usual-user'));
         $openSubTask->setParent($storyIssue);
         $manager->persist($openSubTask);
 
@@ -119,11 +120,10 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $closedSubTask->setResolution($fixedResolution);
         $closedSubTask->setUpdatedAt(new \DateTime('2016-07-05 10:11:31'));
         $closedSubTask->setCreatedAt(new \DateTime('2016-07-04 12:11:31'));
-        $closedSubTask->setAssignee($this->getReference('usual-user'));
+        $closedSubTask->setAssignee($this->getReference('another-usual-user'));
         $closedSubTask->setReporter($this->getReference('admin-user'));
-        $closedSubTask->addCollaborator($this->getReference('usual-user'));
-        $closedSubTask->addCollaborator($this->getReference('admin-user'));
         $closedSubTask->addCollaborator($this->getReference('another-usual-user'));
+        $closedSubTask->addCollaborator($this->getReference('admin-user'));
         $closedSubTask->setParent($storyIssue);
         $manager->persist($closedSubTask);
 

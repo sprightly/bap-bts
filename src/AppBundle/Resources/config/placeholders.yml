@@ -1,0 +1,15 @@
+placeholders:
+    view_content_data_additional_information:
+          items:
+              app_user_assignee_issues: ~
+              app_user_reporter_issues: ~
+
+items:
+    app_user_assignee_issues:
+        template: AppBundle:Issue:user_assignee_issues.html.twig
+        applicable: '@oro_ui.placeholder.filter->isInstanceOf($entity$, Oro\Bundle\UserBundle\Entity\User)'
+        acl: app_issue_view
+    app_user_reporter_issues:
+        template: AppBundle:Issue:user_reporter_issues.html.twig
+        applicable: '@oro_ui.placeholder.filter->isInstanceOf($entity$, Oro\Bundle\UserBundle\Entity\User)'
+        acl: app_issue_view
