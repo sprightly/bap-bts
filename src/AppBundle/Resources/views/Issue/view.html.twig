@@ -19,10 +19,10 @@
                 <div class="responsive-block">
                     {{ UI.renderProperty('Code'|trans, entity.code) }}
                     {{ UI.renderProperty('Summary'|trans, entity.summary) }}
-                    {{ UI.renderProperty('Type'|trans, entity.type) }}
-                    {{ UI.renderProperty('Priority'|trans, entity.priority) }}
+                    {{ UI.renderProperty('app.issue.type.label'|trans, entity.type) }}
+                    {{ UI.renderProperty('app.issue.priority.label'|trans, entity.priority) }}
                     {% if entity.resolution is not empty %}
-                        {{ UI.renderProperty('Resolution'|trans, entity.resolution) }}
+                        {{ UI.renderProperty('app.issue.resolution.label'|trans, entity.resolution) }}
                     {% endif %}
                     {{ UI.renderHtmlProperty('Assignee'|trans, UI.entityViewLink(entity.assignee, entity.assignee.username, 'oro_user_view')) }}
                     {{ UI.renderHtmlProperty('Reporter'|trans, UI.entityViewLink(entity.reporter, entity.reporter.username, 'oro_user_view')) }}

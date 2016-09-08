@@ -1,0 +1,15 @@
+{% extends 'OroSearchBundle:Search:searchResultItem.html.twig' %}
+
+{% set showImage = false %}
+
+{% set recordUrl = indexer_item.recordUrl %}
+{% set entityType = 'app.issue.entity_label'|trans %}
+
+{% set title = indexer_item.recordTitle %}
+
+{% set entityInfo = [] %}
+{% set entityInfo = entityInfo|merge([{'title': 'oro.ui.created_at'|trans, 'value': entity.createdAt ? entity.createdAt|oro_format_datetime : 'N/A'}]) %}
+{% set entityInfo = entityInfo|merge([{'title': 'oro.ui.updated_at'|trans, 'value': entity.updatedAt ? entity.updatedAt|oro_format_datetime : 'N/A'}]) %}
+{% set entityInfo = entityInfo|merge([{'title': 'app.issue.type.label'|trans, 'value': entity.type ? entity.type : 'N/A'}]) %}
+{% set entityInfo = entityInfo|merge([{'title': 'app.issue.priority.label'|trans, 'value': entity.priority ? entity.priority : 'N/A'}]) %}
+{% set entityInfo = entityInfo|merge([{'title': 'app.issue.resolution.label'|trans, 'value': entity.resolution ? entity.resolution : 'N/A'}]) %}

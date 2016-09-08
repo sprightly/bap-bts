@@ -23,9 +23,6 @@
 'View': 'View'
 'Collaborators': 'Collaborators'
 'Sub-tasks': 'Sub-tasks'
-'Type': 'Type'
-'Priority': 'Priority'
-'Resolution': 'Resolution'
 'Issues where user is assignee': 'Issues where user is assignee'
 'Issues where user is reporter': 'Issues where user is reporter'
 'All your active issues': 'All your active issues'
@@ -33,6 +30,7 @@
 app:
     issue:
         entity_label: 'Issue'
+        entity_plural_label: 'Issues'
         type.label: 'Type'
         priority.label: 'Priority'
         resolution.label: 'Resolution'
