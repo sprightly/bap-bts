@@ -19,21 +19,21 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $typeClassName = ExtendHelper::buildEnumValueClassName('issue_type');
         /** @var EnumValueRepository $typeRepository */
         $typeRepository = $manager->getRepository($typeClassName);
-        $taskType = $typeRepository->findOneById('task');
-        $subtaskType = $typeRepository->findOneById('subtask');
-        $storyType = $typeRepository->findOneById('story');
+        $taskType       = $typeRepository->findOneById('task');
+        $subtaskType    = $typeRepository->findOneById('subtask');
+        $storyType      = $typeRepository->findOneById('story');
 
         $priorityClassName = ExtendHelper::buildEnumValueClassName('issue_priority');
         /** @var EnumValueRepository $priorityRepository */
         $priorityRepository = $manager->getRepository($priorityClassName);
-        $majorPriority = $priorityRepository->findOneById('major');
-        $blockerPriority = $priorityRepository->findOneById('blocker');
-        $trivialPriority = $priorityRepository->findOneById('trivial');
+        $majorPriority      = $priorityRepository->findOneById('major');
+        $blockerPriority    = $priorityRepository->findOneById('blocker');
+        $trivialPriority    = $priorityRepository->findOneById('trivial');
 
         $resolutionClassName = ExtendHelper::buildEnumValueClassName('issue_resolution');
         /** @var EnumValueRepository $resolutionRepository */
         $resolutionRepository = $manager->getRepository($resolutionClassName);
-        $fixedResolution = $resolutionRepository->findOneById('fixed');
+        $fixedResolution      = $resolutionRepository->findOneById('fixed');
 
         $firstIssue = new Issue();
         $firstIssue->setSummary('First issue..');
@@ -56,6 +56,248 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $firstIssue->addCollaborator($this->getReference('usual-user'));
         $firstIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($firstIssue);
+
+        $secondIssue = new Issue();
+        $secondIssue->setSummary('Second issue..');
+        $secondIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $secondIssue->setCode('APB-11');
+        $secondIssue->setType($taskType);
+        $secondIssue->setPriority($majorPriority);
+        $secondIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $secondIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $secondIssue->setAssignee($this->getReference('usual-user'));
+        $secondIssue->setReporter($this->getReference('admin-user'));
+        $secondIssue->addCollaborator($this->getReference('usual-user'));
+        $secondIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($secondIssue);
+
+        $thirdIssue = new Issue();
+        $thirdIssue->setSummary('Third issue..');
+        $thirdIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $thirdIssue->setCode('APB-12');
+        $thirdIssue->setType($taskType);
+        $thirdIssue->setPriority($majorPriority);
+        $thirdIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $thirdIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $thirdIssue->setAssignee($this->getReference('usual-user'));
+        $thirdIssue->setReporter($this->getReference('admin-user'));
+        $thirdIssue->addCollaborator($this->getReference('usual-user'));
+        $thirdIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($thirdIssue);
+
+        $fourthIssue = new Issue();
+        $fourthIssue->setSummary('Fourth issue..');
+        $fourthIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $fourthIssue->setCode('APB-13');
+        $fourthIssue->setType($taskType);
+        $fourthIssue->setPriority($majorPriority);
+        $fourthIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $fourthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $fourthIssue->setAssignee($this->getReference('usual-user'));
+        $fourthIssue->setReporter($this->getReference('admin-user'));
+        $fourthIssue->addCollaborator($this->getReference('usual-user'));
+        $fourthIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($fourthIssue);
+
+        $fifthIssue = new Issue();
+        $fifthIssue->setSummary('Fifth issue..');
+        $fifthIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $fifthIssue->setCode('APB-14');
+        $fifthIssue->setType($taskType);
+        $fifthIssue->setPriority($majorPriority);
+        $fifthIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $fifthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $fifthIssue->setAssignee($this->getReference('usual-user'));
+        $fifthIssue->setReporter($this->getReference('admin-user'));
+        $fifthIssue->addCollaborator($this->getReference('usual-user'));
+        $fifthIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($fifthIssue);
+
+        $sixthIssue = new Issue();
+        $sixthIssue->setSummary('Sixth issue..');
+        $sixthIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $sixthIssue->setCode('APB-15');
+        $sixthIssue->setType($taskType);
+        $sixthIssue->setPriority($majorPriority);
+        $sixthIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $sixthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $sixthIssue->setAssignee($this->getReference('usual-user'));
+        $sixthIssue->setReporter($this->getReference('admin-user'));
+        $sixthIssue->addCollaborator($this->getReference('usual-user'));
+        $sixthIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($sixthIssue);
+
+        $seventhIssue = new Issue();
+        $seventhIssue->setSummary('Seventh issue..');
+        $seventhIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $seventhIssue->setCode('APB-16');
+        $seventhIssue->setType($taskType);
+        $seventhIssue->setPriority($majorPriority);
+        $seventhIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $seventhIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $seventhIssue->setAssignee($this->getReference('usual-user'));
+        $seventhIssue->setReporter($this->getReference('admin-user'));
+        $seventhIssue->addCollaborator($this->getReference('usual-user'));
+        $seventhIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($seventhIssue);
+
+        $eighthIssue = new Issue();
+        $eighthIssue->setSummary('Eighth issue..');
+        $eighthIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $eighthIssue->setCode('APB-17');
+        $eighthIssue->setType($taskType);
+        $eighthIssue->setPriority($majorPriority);
+        $eighthIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $eighthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $eighthIssue->setAssignee($this->getReference('usual-user'));
+        $eighthIssue->setReporter($this->getReference('admin-user'));
+        $eighthIssue->addCollaborator($this->getReference('usual-user'));
+        $eighthIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($eighthIssue);
+
+        $ninthIssue = new Issue();
+        $ninthIssue->setSummary('Ninth issue..');
+        $ninthIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $ninthIssue->setCode('APB-18');
+        $ninthIssue->setType($taskType);
+        $ninthIssue->setPriority($majorPriority);
+        $ninthIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $ninthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $ninthIssue->setAssignee($this->getReference('usual-user'));
+        $ninthIssue->setReporter($this->getReference('admin-user'));
+        $ninthIssue->addCollaborator($this->getReference('usual-user'));
+        $ninthIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($ninthIssue);
+
+        $tenthIssue = new Issue();
+        $tenthIssue->setSummary('Tenth issue..');
+        $tenthIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $tenthIssue->setCode('APB-19');
+        $tenthIssue->setType($taskType);
+        $tenthIssue->setPriority($majorPriority);
+        $tenthIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $tenthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $tenthIssue->setAssignee($this->getReference('usual-user'));
+        $tenthIssue->setReporter($this->getReference('admin-user'));
+        $tenthIssue->addCollaborator($this->getReference('usual-user'));
+        $tenthIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($tenthIssue);
+
+        $eleventhIssue = new Issue();
+        $eleventhIssue->setSummary('Eleventh issue..');
+        $eleventhIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $eleventhIssue->setCode('APB-20');
+        $eleventhIssue->setType($taskType);
+        $eleventhIssue->setPriority($majorPriority);
+        $eleventhIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $eleventhIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $eleventhIssue->setAssignee($this->getReference('usual-user'));
+        $eleventhIssue->setReporter($this->getReference('admin-user'));
+        $eleventhIssue->addCollaborator($this->getReference('usual-user'));
+        $eleventhIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($eleventhIssue);
+
+        $twelfthIssue = new Issue();
+        $twelfthIssue->setSummary('Twelfth issue..');
+        $twelfthIssue->setDescription(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sem volutpat, 
+            faucibus elit id, dapibus ligula. Suspendisse vehicula quam non tincidunt ultricies. Vestibulum ante ipsum 
+            primis in faucibus orci luctus et ultrices posuere cubilia Curae; In mollis nunc sed ante lacinia ultricies 
+            in quis tellus. Suspendisse vulputate, nisl efficitur faucibus posuere, augue lacus ornare est, nec 
+            interdum mauris neque ut arcu. Nunc dolor sapien, elementum ac ultrices id, accumsan id sapien. 
+            Duis sed suscipit nulla, in ullamcorper lectus. Pellentesque quis turpis ligula. 
+        '
+        );
+        $twelfthIssue->setCode('APB-21');
+        $twelfthIssue->setType($taskType);
+        $twelfthIssue->setPriority($majorPriority);
+        $twelfthIssue->setUpdatedAt(new \DateTime('2016-07-01 15:11:31'));
+        $twelfthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
+        $twelfthIssue->setAssignee($this->getReference('usual-user'));
+        $twelfthIssue->setReporter($this->getReference('admin-user'));
+        $twelfthIssue->addCollaborator($this->getReference('usual-user'));
+        $twelfthIssue->addCollaborator($this->getReference('admin-user'));
+        $manager->persist($twelfthIssue);
 
         $storyIssue = new Issue();
         $storyIssue->setSummary('Story issue..');

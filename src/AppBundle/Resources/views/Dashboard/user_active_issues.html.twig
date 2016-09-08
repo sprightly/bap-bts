@@ -1,0 +1,26 @@
+{% extends 'OroDashboardBundle:Dashboard:widget.html.twig' %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+{% block content %}
+    {{ dataGrid.renderGrid('app-users-active-issues-grid', {userId: app.user.id}) }}
+{% endblock %}
+
+{% block actions %}
+    {% set actions = [{
+    'url': path('app_issue_index', {
+        'grid': {
+            'app-issues-grid': {
+                'f': {
+                    'collaborator': {
+                        'value': app.user.id
+                    }
+                }
+            } | url_encode
+        }
+    }),
+    'type': 'link',
+    'label': 'All your active issues',
+    }] %}
+
+    {{ parent() }}
+{% endblock %}

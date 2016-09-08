@@ -28,10 +28,18 @@
 'Resolution': 'Resolution'
 'Issues where user is assignee': 'Issues where user is assignee'
 'Issues where user is reporter': 'Issues where user is reporter'
+'All your active issues': 'All your active issues'
 
 app:
-  issue:
-    entity_label: 'Issue'
-    type.label: 'Type'
-    priority.label: 'Priority'
-    resolution.label: 'Resolution'
+    issue:
+        entity_label: 'Issue'
+        type.label: 'Type'
+        priority.label: 'Priority'
+        resolution.label: 'Resolution'
+    dashboard:
+        users_active_issue:
+            title: 'Your active issues'
+            description: 'This widget displays the users active issues'
+        issues_by_type_chart:
+            title: 'Issues by type chart'
+            description: 'Pie chart of issues by type.'

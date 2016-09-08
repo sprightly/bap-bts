@@ -1,0 +1,4 @@
+oro_chart:
+    issues_by_type_chart:
+        label: app.dashboard.issues_by_type_chart.title
+        template: OroCRMCampaignBundle:Chart:pie.html.twig

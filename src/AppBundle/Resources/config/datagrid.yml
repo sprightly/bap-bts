@@ -8,7 +8,7 @@ datagrid:
             type: orm
             query:
                 select:
-                    - issue.id
+                    - distinct issue.id
                     - issue.code
                     - issue.summary
                     - typeEnum.name as issueType
@@ -27,16 +27,17 @@ datagrid:
                         - { join: issue.resolution, alias: resolutionEnum }
                         - { join: issue.assignee, alias: assignee }
                         - { join: issue.reporter, alias: reporter }
+                        - { join: issue.collaborators, alias: collaborator }
         columns:
             code:
                 label: Code
             summary:
                 label: Summary
-            type:
+            issueType:
                 label: Type
-            priority:
+            issuePriority:
                 label: Priority
-            resolution:
+            issueResolution:
                 label: Resolution
             reporterUsername:
                 label: Reporter
@@ -69,11 +70,11 @@ datagrid:
                     data_name: issue.code
                 summary:
                     data_name: issue.summary
-                type:
+                issueType:
                     data_name: issueType
-                priority:
+                issuePriority:
                     data_name: issuePriority
-                resolution:
+                issueResolution:
                     data_name: issueResolution
                 reporterUsername:
                     data_name: reporterUsername
@@ -93,21 +94,42 @@ datagrid:
                 summary:
                     type: string
                     data_name: issue.summary
-                type:
-                    type: string
-                    data_name: issueType
-                priority:
-                    type: string
+                issuePriority:
+                    type: enum
                     data_name: issuePriority
-                resolution:
-                    type: string
+                    enum_code: issue_priority
+                issueType:
+                    type: enum
+                    data_name: issueType
+                    enum_code: issue_type
+                issueResolution:
+                    type: enum
                     data_name: issueResolution
-                reporterUsername:
-                    type: string
-                    data_name: reporterUsername
-                assigneeUsername:
-                    type: string
-                    data_name: assigneeUsername
+                    enum_code: issue_resolution
+                assignee:
+                    type: entity
+                    data_name: assignee
+                    label: Assignee
+                    options:
+                        field_type:     entity
+                        field_options:
+                            class: Oro\Bundle\UserBundle\Entity\User
+                reporter:
+                    type: entity
+                    data_name: reporter
+                    label: Reporter
+                    options:
+                        field_type:     entity
+                        field_options:
+                            class: Oro\Bundle\UserBundle\Entity\User
+                collaborator:
+                    type: entity
+                    data_name: collaborator
+                    label: Collaborator
+                    options:
+                        field_type:     entity
+                        field_options:
+                            class: Oro\Bundle\UserBundle\Entity\User
                 createdAt:
                     type: datetime
                     data_name: issue.createdAt
@@ -135,6 +157,12 @@ datagrid:
                         - issue.id = :issueId
             bind_parameters:
                 - issueId
+        options:
+            toolbarOptions:
+                hide: true
+                pageSize:
+                    items: [999]
+                    default_per_page: 999
         columns:
             username:
                 label: Username
@@ -171,6 +199,12 @@ datagrid:
                 - issueId
         sorters: ~
         filters: ~
+        options:
+            toolbarOptions:
+                hide: true
+                pageSize:
+                    items: [999]
+                    default_per_page: 999
     app-assignee-issues-grid:
         extends: app-issues-grid
         source:
@@ -197,5 +231,26 @@ datagrid:
                         - user.id = :userId
             bind_parameters:
                 - userId
+        sorters: ~
+        filters: ~
+    app-users-active-issues-grid:
+        extends: app-issues-grid
+        source:
+            query:
+                join:
+                    left:
+                        - { join: issue.collaborators, alias: user }
+                where:
+                    and:
+                        - user.id = :userId
+                        - issue.resolution is null
+            bind_parameters:
+                - userId
+        options:
+            toolbarOptions:
+                hide: true
+                pageSize:
+                    items: [10]
+                    default_per_page: 10
         sorters: ~
         filters: ~

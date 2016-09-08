@@ -1,3 +1,5 @@
 app_bundle:
     resource: "@AppBundle/Controller"
     type:     annotation
+    options:
+        expose: true

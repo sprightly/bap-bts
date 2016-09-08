@@ -1,0 +1,13 @@
+oro_dashboard_config:
+    widgets:
+        users_active_issue:
+            label: app.dashboard.users_active_issue.title
+            route: oro_dashboard_widget
+            route_parameters:
+                bundle: AppBundle
+                name: user_active_issues
+            description: app.dashboard.users_active_issue.description
+        issues_by_type_chart:
+            label: app.dashboard.issues_by_type_chart.title
+            description: app.dashboard.issues_by_type_chart.description
+            route: app_issues_by_type_chart
