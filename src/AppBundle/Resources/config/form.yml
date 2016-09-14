@@ -1,0 +1,7 @@
+services:
+    app.form.type.issue:
+        class: AppBundle\Form\Type\IssueType
+        tags:
+            - { name: form.type, alias: app_issue}
+        arguments:
+            - '@oro_entity.doctrine_helper'

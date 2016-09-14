@@ -30,30 +30,40 @@ datagrid:
                         - { join: issue.collaborators, alias: collaborator }
         columns:
             code:
-                label: Code
+                label: app.issue.code.label
             summary:
-                label: Summary
+                label: app.issue.summary.label
             issueType:
-                label: Type
+                label: app.issue.type.label
             issuePriority:
-                label: Priority
+                label: app.issue.priority.label
             issueResolution:
-                label: Resolution
+                label: app.issue.resolution.label
             reporterUsername:
-                label: Reporter
+                label: app.issue.reporter.label
             assigneeUsername:
-                label: Assignee
+                label: app.issue.assignee.label
             createdAt:
-                label: Created
+                label: app.issue.created.label
                 frontend_type: datetime
             updatedAt:
-                label: Updated
+                label: app.issue.updated.label
                 frontend_type: datetime
         properties:
             id: ~
             view_link:
                 type: url
                 route: app_issue_view
+                params:
+                    - id
+            update_link:
+                type: url
+                route: app_issue_update
+                params:
+                    - id
+            delete_link:
+                type: url
+                route: app_api_delete_issue
                 params:
                     - id
         actions:
@@ -64,6 +74,18 @@ datagrid:
                 icon:          eye-open
                 acl_resource:  app_issue_view
                 rowAction:     true
+            update:
+                type:           navigate
+                label:          Update
+                link:           update_link
+                icon:           edit
+                acl_resource:   app_issue_update
+            delete:
+                type:           delete
+                label:          Delete
+                link:           delete_link
+                icon:           trash
+                acl_resource:   app_issue_delete
         sorters:
             columns:
                 code:
@@ -109,7 +131,6 @@ datagrid:
                 assignee:
                     type: entity
                     data_name: assignee
-                    label: Assignee
                     options:
                         field_type:     entity
                         field_options:
@@ -125,7 +146,6 @@ datagrid:
                 collaborator:
                     type: entity
                     data_name: collaborator
-                    label: Collaborator
                     options:
                         field_type:     entity
                         field_options:
@@ -164,12 +184,9 @@ datagrid:
                     items: [999]
                     default_per_page: 999
         columns:
-            username:
-                label: Username
-            firstName:
-                label: First Name
-            lastName:
-                label: Last Name
+            username:   ~
+            firstName:  ~
+            lastName:   ~
         properties:
             id: ~
             view_link:

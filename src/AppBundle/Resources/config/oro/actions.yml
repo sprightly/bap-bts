@@ -1,0 +1,39 @@
+operations:
+    app_create_issue:
+        label: app.issue.operation.create_issue
+        routes:
+            - oro_user_view
+        acl_resource: app_issue_create
+        actions:
+            - '@redirect':
+                route: app_issue_create
+                route_parameters:
+                    assignee_id: $.data.id
+    app_update_issue:
+        label: app.issue.operation.update_issue
+        routes:
+            - app_issue_view
+        acl_resource: app_issue_update
+        actions:
+            - '@redirect':
+                route: app_issue_update
+                route_parameters:
+                    id: $.data.id
+    app_delete_issue:
+        label: app.issue.operation.delete_issue
+        routes:
+            - app_issue_view
+        acl_resource: app_issue_delete
+        frontend_options:
+            confirmation: "Are you sure you want to delete this item?"
+        actions:
+            - '@run_action_group':
+                action_group: DELETE
+                parameters_mapping:
+                    data: $.data
+            - '@flash_message':
+                message: oro.action.delete_message
+                type: 'success'
+                message_parameters:
+                    entityLabel: $.entityLabel
+            - '@redirect': {route: app_issue_index}

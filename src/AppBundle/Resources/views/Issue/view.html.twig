@@ -17,17 +17,17 @@
         <div class="widget-content">
             <div class="row-fluid form-horizontal">
                 <div class="responsive-block">
-                    {{ UI.renderProperty('Code'|trans, entity.code) }}
-                    {{ UI.renderProperty('Summary'|trans, entity.summary) }}
+                    {{ UI.renderProperty('app.issue.code.label'|trans, entity.code) }}
+                    {{ UI.renderProperty('app.issue.summary.label'|trans, entity.summary) }}
                     {{ UI.renderProperty('app.issue.type.label'|trans, entity.type) }}
                     {{ UI.renderProperty('app.issue.priority.label'|trans, entity.priority) }}
                     {% if entity.resolution is not empty %}
                         {{ UI.renderProperty('app.issue.resolution.label'|trans, entity.resolution) }}
                     {% endif %}
-                    {{ UI.renderHtmlProperty('Assignee'|trans, UI.entityViewLink(entity.assignee, entity.assignee.username, 'oro_user_view')) }}
+                    {{ UI.renderHtmlProperty('app.issue.assignee.label'|trans, UI.entityViewLink(entity.assignee, entity.assignee.username, 'oro_user_view')) }}
                     {{ UI.renderHtmlProperty('Reporter'|trans, UI.entityViewLink(entity.reporter, entity.reporter.username, 'oro_user_view')) }}
-                    {{ UI.renderProperty('Created'|trans, entity.createdAt|date) }}
-                    {{ UI.renderProperty('Updated'|trans, entity.updatedAt|date) }}
+                    {{ UI.renderProperty('app.issue.created.label'|trans, entity.createdAt|date) }}
+                    {{ UI.renderProperty('app.issue.updated.label'|trans, entity.updatedAt|date) }}
                     {% if entity.parent is not empty %}
                         {{ UI.renderHtmlProperty('Story'|trans, UI.entityViewLink(entity.parent, entity.parent.summary, 'app_issue_view')) }}
                     {% endif %}

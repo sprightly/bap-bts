@@ -12,7 +12,7 @@ class LoadIssueResolutionData extends AbstractFixture
     /** @var array */
     protected $data = [
         'Wont fix' => false,
-        'Fixed' => true,
+        'Fixed' => false,
         'Cannot reproduce' => false,
         'Done' => false,
         'Wont done' => false
