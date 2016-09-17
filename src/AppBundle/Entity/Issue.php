@@ -43,6 +43,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\Length(min=1, max=255)
+     * @Assert\NotBlank()
      *
      * @var string
      */
@@ -53,6 +54,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * @ConfigField()
      *
      * @Assert\Length(min=1, max=255)
+     * @Assert\NotBlank()
      *
      * @var string
      */

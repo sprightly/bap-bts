@@ -35,7 +35,9 @@ class IssueType extends AbstractType
         $issueTypesChoices = [];
         /** @var AbstractEnumValue $issueType */
         foreach ($issueTypes as $issueType) {
-            $issueTypesChoices[$issueType->getName()] = $issueType;
+            if ('subtask' != $issueType->getId()) {
+                $issueTypesChoices[$issueType->getName()] = $issueType;
+            }
         }
 
         $issuePriorities      = $this->doctrineHelper
@@ -91,7 +93,7 @@ class IssueType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'AppBundle\Entity\Issue',
+                'data_class' => 'AppBundle\Entity\Issue'
             )
         );
     }

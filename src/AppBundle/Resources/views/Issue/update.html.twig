@@ -3,6 +3,8 @@
 
 {% if form.vars.value.id %}
     {% set formAction = path('app_issue_update', { 'id': form.vars.value.id }) %}
+{% elseif app.request.attributes.get('_route') == 'app_issue_create_subtask' %}
+    {% set formAction = path('app_issue_create_subtask', {'story_id':app.request.attributes.get('_route_params').story_id}) %}
 {% else %}
     {% set formAction = path('app_issue_create') %}
 {% endif %}
@@ -32,19 +34,24 @@
 {% block content_data %}
     {% set id = 'issue-edit' %}
 
+    {% set formData = [
+        form_row(form.summary),
+        form_row(form.code),
+        form_row(form.description),
+        form_row(form.assignee),
+        form_row(form.priority)
+    ] %}
+
+    {% if form.type.vars.value != 'story' and app.request.attributes.get('_route') != 'app_issue_create_subtask' %}
+        {% set formData = formData|merge({'type': form_row(form.type)}) %}
+    {% endif %}
+
     {% set dataBlocks = [{
         'title': 'General'|trans,
         'class': 'active',
         'subblocks': [{
         'title': '',
-        'data': [
-            form_row(form.summary),
-            form_row(form.code),
-            form_row(form.description),
-            form_row(form.assignee),
-            form_row(form.type),
-            form_row(form.priority)
-        ]
+        'data': formData
         }]
     }] %}
     {% set data = {

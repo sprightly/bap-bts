@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Issue;
 use Doctrine\ORM\EntityRepository;
+use Oro\Bundle\EntityExtendBundle\Tools\ExtendHelper;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -46,6 +47,61 @@ class IssueController extends Controller
     }
 
     /**
+     * @Route("/update/{id}", name="app_issue_update", requirements={"id":"\d+"}, defaults={"id":0})
+     * @Template()
+     * @Acl(
+     *     id="app_issue_update",
+     *     type="entity",
+     *     class="AppBundle:Issue",
+     *     permission="EDIT"
+     * )
+     * @param Issue $issue
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function updateAction(Issue $issue, Request $request)
+    {
+        return $this->update($issue, $request);
+    }
+
+    /**
+     * @Route(
+     *     "/create/subtask/{story_id}",
+     *     name="app_issue_create_subtask",
+     *     requirements={"story_id":"\d+"}
+     * )
+     * @Template("AppBundle:Issue:update.html.twig")
+     * @Acl(
+     *     id="app_issue_create",
+     *     type="entity",
+     *     class="AppBundle:Issue",
+     *     permission="CREATE"
+     * )
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function createSubtaskAction(Request $request)
+    {
+        $issue = new Issue();
+        $story = $this->get('doctrine')
+                      ->getRepository('AppBundle:Issue')
+                      ->findOneById(
+                          $request->attributes->get('_route_params')['story_id']
+                      );
+        $issue->setParent($story);
+
+        $subtaskType = $this->getDoctrine()
+                            ->getRepository(ExtendHelper::buildEnumValueClassName('issue_type'))
+                            ->find('subtask');
+        $issue->setType($subtaskType);
+        $issue->setReporter($this->getUser());
+
+        return $this->update($issue, $request);
+    }
+
+    /**
      * @Route(
      *     "/create/{assignee_id}",
      *     name="app_issue_create",
@@ -82,29 +138,12 @@ class IssueController extends Controller
     }
 
     /**
-     * @Route("/update/{id}", name="app_issue_update", requirements={"id":"\d+"}, defaults={"id":0})
-     * @Template()
-     * @Acl(
-     *     id="app_issue_update",
-     *     type="entity",
-     *     class="AppBundle:Issue",
-     *     permission="EDIT"
-     * )
      * @param Issue $issue
      * @param Request $request
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function updateAction(Issue $issue, Request $request)
-    {
-        return $this->update($issue, $request);
-    }
-
-    /**
-     * @param Issue $issue
-     * @param Request $request
+     * @internal param array $formOptions
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      * @internal param Issue $issue
      */
     private function update(Issue $issue, Request $request)

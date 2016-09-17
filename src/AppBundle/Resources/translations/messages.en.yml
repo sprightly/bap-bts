@@ -41,6 +41,7 @@ app:
             update_issue: 'Update Issue'
             delete_issue: 'Delete Issue'
             delete_confirmation: 'Are you sure you want to delete this item?'
+            add_subtask: 'Add Subtask'
     dashboard:
         users_active_issue:
             title: 'Your active issues'

@@ -54,14 +54,16 @@
             }
         ]) %}
     {% endif %}
-    {% set dataBlocks = dataBlocks|merge([
-        {
-            'title': 'Collaborators'|trans,
-            'subblocks': [
-                { 'data' : [dataGrid.renderGrid('app-issue-collaborators-grid', {issueId: entity.id})] }
-            ]
-        }
-    ]) %}
+    {% if entity.collaborators is not empty %}
+        {% set dataBlocks = dataBlocks|merge([
+            {
+                'title': 'Collaborators'|trans,
+                'subblocks': [
+                    { 'data' : [dataGrid.renderGrid('app-issue-collaborators-grid', {issueId: entity.id})] }
+                ]
+            }
+        ]) %}
+    {% endif %}
 
     {% set id = 'issueView' %}
     {% set data = { 'dataBlocks': dataBlocks } %}

@@ -37,3 +37,14 @@ operations:
                 message_parameters:
                     entityLabel: $.entityLabel
             - '@redirect': {route: app_issue_index}
+    app_add_issue_subtask:
+        label: app.issue.operation.add_subtask
+        routes:
+            - app_issue_view
+        preconditions:
+            @equal: [$type.id, "story"]
+        actions:
+            - @redirect:
+                route: app_issue_create_subtask
+                route_parameters:
+                    story_id: $id
