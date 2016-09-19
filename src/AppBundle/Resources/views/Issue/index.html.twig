@@ -2,3 +2,16 @@
 
 {% set gridName = 'app-issues-grid' %}
 {% set pageTitle = 'Issue' %}
+
+{% block navButtons %}
+    {% include 'OroImportExportBundle:ImportExport:buttons.html.twig' with {
+    entity_class: 'AppBundle\\Entity\\Issue',
+    exportProcessor: 'app_issue.export',
+    exportTitle: 'app.issue.operation.export'|trans,
+    importProcessor: 'app_issue.add_or_replace',
+    importTitle: 'app.issue.operation.import'|trans,
+    dataGridName: gridName
+    } %}
+
+    {{ parent() }}
+{% endblock %}

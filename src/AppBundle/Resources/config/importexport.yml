@@ -1,0 +1,29 @@
+services:
+    app.importexport.data_converter:
+        parent: oro_importexport.data_converter.configurable
+    app.importexport.strategy.issue.add_or_replace:
+        parent: oro_importexport.strategy.configurable_add_or_replace
+
+    app.importexport.processor.export:
+        parent: oro_importexport.processor.export_abstract
+        calls:
+            - [setDataConverter, ['@app.importexport.data_converter']]
+        tags:
+            - name: oro_importexport.processor
+              type: export
+              entity: AppBundle\Entity\Issue
+              alias: app_issue.export
+    app.importexport.processor.import.add_or_replace:
+        parent: oro_importexport.processor.import_abstract
+        calls:
+            - [setDataConverter, ['@app.importexport.data_converter']]
+            - [setStrategy, ['@app.importexport.strategy.issue.add_or_replace']]
+        tags:
+            - name: oro_importexport.processor
+              type: import
+              entity: AppBundle\Entity\Issue
+              alias: app_issue.add_or_replace
+            - name: oro_importexport.processor
+              type: import_validation
+              entity: AppBundle\Entity\Issue
+              alias: app_issue.add_or_replace

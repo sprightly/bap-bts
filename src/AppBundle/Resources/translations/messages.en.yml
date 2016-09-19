@@ -36,12 +36,15 @@ app:
         created.label: 'Created'
         updated.label: 'Updated'
         reporter.label: 'Reporter'
+        collaborators.label: 'Collaborators'
         operation:
             create_issue: 'Create Issue'
             update_issue: 'Update Issue'
             delete_issue: 'Delete Issue'
             delete_confirmation: 'Are you sure you want to delete this item?'
             add_subtask: 'Add Subtask'
+            import: 'Import'
+            export: 'Export'
     dashboard:
         users_active_issue:
             title: 'Your active issues'
