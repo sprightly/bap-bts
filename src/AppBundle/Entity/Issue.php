@@ -22,6 +22,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          },
  *          "tag"={
  *              "enabled"=true
+ *          },
+ *          "workflow"={
+ *              "active_workflows"={"issue_status"}
  *          }
  *     }
  * )

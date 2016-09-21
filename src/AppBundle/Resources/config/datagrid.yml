@@ -33,12 +33,6 @@ datagrid:
                 label: app.issue.code.label
             summary:
                 label: app.issue.summary.label
-            issueType:
-                label: app.issue.type.label
-            issuePriority:
-                label: app.issue.priority.label
-            issueResolution:
-                label: app.issue.resolution.label
             reporterUsername:
                 label: app.issue.reporter.label
             assigneeUsername:
@@ -92,12 +86,6 @@ datagrid:
                     data_name: issue.code
                 summary:
                     data_name: issue.summary
-                issueType:
-                    data_name: issueType
-                issuePriority:
-                    data_name: issuePriority
-                issueResolution:
-                    data_name: issueResolution
                 reporterUsername:
                     data_name: reporterUsername
                 assigneeUsername:
@@ -117,25 +105,28 @@ datagrid:
                     type: string
                     data_name: issue.summary
                 issuePriority:
+                    label: 'app.issue.priority.label'
                     type: enum
                     data_name: issuePriority
                     enum_code: issue_priority
                 issueType:
+                    label: 'app.issue.type.label'
                     type: enum
                     data_name: issueType
                     enum_code: issue_type
                 issueResolution:
+                    label: 'app.issue.resolution.label'
                     type: enum
                     data_name: issueResolution
                     enum_code: issue_resolution
-                assignee:
+                assigneeUsername:
                     type: entity
                     data_name: assignee
                     options:
                         field_type:     entity
                         field_options:
                             class: Oro\Bundle\UserBundle\Entity\User
-                reporter:
+                reporterUsername:
                     type: entity
                     data_name: reporter
                     label: Reporter
@@ -144,6 +135,7 @@ datagrid:
                         field_options:
                             class: Oro\Bundle\UserBundle\Entity\User
                 collaborator:
+                    label: 'app.issue.collaborators.label'
                     type: entity
                     data_name: collaborator
                     options:
@@ -260,7 +252,6 @@ datagrid:
                 where:
                     and:
                         - user.id = :userId
-                        - issue.resolution is null
             bind_parameters:
                 - userId
         options:
@@ -270,4 +261,8 @@ datagrid:
                     items: [10]
                     default_per_page: 10
         sorters: ~
-        filters: ~
+        filters:
+            default:
+                workflowStepLableByWorkflowStep:
+                    value:
+                        a: 2
