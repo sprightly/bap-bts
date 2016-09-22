@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="app_issue")
+ * @ORM\HasLifecycleCallbacks()
  * @Config(
  *     defaultValues={
  *          "security"={
@@ -268,7 +269,9 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     public function addCollaborator(User $collaborator)
     {
-        $this->collaborators[] = $collaborator;
+        if (! $this->getCollaborators()->contains($collaborator)) {
+            $this->collaborators[] = $collaborator;
+        }
 
         return $this;
     }

@@ -1,0 +1,56 @@
+definitions:
+    issue_assigned:
+        label: 'Issue Assigned'
+        enabled: true
+        order: 20
+        entity: AppBundle\Entity\Issue
+        exclude_definitions: [issue_assigned]
+        actions_configuration:
+            - '@call_method':
+                object: $.data
+                method: addCollaborator
+                method_parameters: [$.data.assignee]
+    issue_reported:
+        label: 'Issue Reported'
+        enabled: true
+        order: 30
+        entity: AppBundle\Entity\Issue
+        exclude_definitions: [issue_reported]
+        actions_configuration:
+            - '@call_method':
+                object: $.data
+                method: addCollaborator
+                method_parameters: [$.data.reporter]
+    note_added_or_updated:
+        label: 'Note Added'
+        enabled: true
+        order: 50
+        entity: Oro\Bundle\NoteBundle\Entity\Note
+        exclude_definitions: [note_added_or_updated]
+        actions_configuration:
+            - '@call_method':
+                object: $.data.target
+                method: addCollaborator
+                method_parameters: [$.data.owner]
+            - '@call_method':
+                object: $.data.target
+                method: setUpdatedAt
+                method_parameters: [$.data.getUpdatedAt]
+triggers:
+    issue_assigned:
+        -
+            event: create
+        -
+            event: update
+            field: assignee
+    issue_reported:
+        -
+            event: create
+        -
+            event: update
+            field: reporter
+    note_added_or_updated:
+        -
+            event: create
+        -
+            event: update

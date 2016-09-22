@@ -53,8 +53,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $firstIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $firstIssue->setAssignee($this->getReference('usual-user'));
         $firstIssue->setReporter($this->getReference('admin-user'));
-        $firstIssue->addCollaborator($this->getReference('usual-user'));
-        $firstIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($firstIssue);
 
         $secondIssue = new Issue();
@@ -75,8 +73,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $secondIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $secondIssue->setAssignee($this->getReference('usual-user'));
         $secondIssue->setReporter($this->getReference('admin-user'));
-        $secondIssue->addCollaborator($this->getReference('usual-user'));
-        $secondIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($secondIssue);
 
         $thirdIssue = new Issue();
@@ -97,8 +93,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $thirdIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $thirdIssue->setAssignee($this->getReference('usual-user'));
         $thirdIssue->setReporter($this->getReference('admin-user'));
-        $thirdIssue->addCollaborator($this->getReference('usual-user'));
-        $thirdIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($thirdIssue);
 
         $fourthIssue = new Issue();
@@ -119,8 +113,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $fourthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $fourthIssue->setAssignee($this->getReference('usual-user'));
         $fourthIssue->setReporter($this->getReference('admin-user'));
-        $fourthIssue->addCollaborator($this->getReference('usual-user'));
-        $fourthIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($fourthIssue);
 
         $fifthIssue = new Issue();
@@ -141,8 +133,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $fifthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $fifthIssue->setAssignee($this->getReference('usual-user'));
         $fifthIssue->setReporter($this->getReference('admin-user'));
-        $fifthIssue->addCollaborator($this->getReference('usual-user'));
-        $fifthIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($fifthIssue);
 
         $sixthIssue = new Issue();
@@ -163,8 +153,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $sixthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $sixthIssue->setAssignee($this->getReference('usual-user'));
         $sixthIssue->setReporter($this->getReference('admin-user'));
-        $sixthIssue->addCollaborator($this->getReference('usual-user'));
-        $sixthIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($sixthIssue);
 
         $seventhIssue = new Issue();
@@ -185,8 +173,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $seventhIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $seventhIssue->setAssignee($this->getReference('usual-user'));
         $seventhIssue->setReporter($this->getReference('admin-user'));
-        $seventhIssue->addCollaborator($this->getReference('usual-user'));
-        $seventhIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($seventhIssue);
 
         $eighthIssue = new Issue();
@@ -207,8 +193,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $eighthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $eighthIssue->setAssignee($this->getReference('usual-user'));
         $eighthIssue->setReporter($this->getReference('admin-user'));
-        $eighthIssue->addCollaborator($this->getReference('usual-user'));
-        $eighthIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($eighthIssue);
 
         $ninthIssue = new Issue();
@@ -229,8 +213,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $ninthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $ninthIssue->setAssignee($this->getReference('usual-user'));
         $ninthIssue->setReporter($this->getReference('admin-user'));
-        $ninthIssue->addCollaborator($this->getReference('usual-user'));
-        $ninthIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($ninthIssue);
 
         $tenthIssue = new Issue();
@@ -251,8 +233,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $tenthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $tenthIssue->setAssignee($this->getReference('usual-user'));
         $tenthIssue->setReporter($this->getReference('admin-user'));
-        $tenthIssue->addCollaborator($this->getReference('usual-user'));
-        $tenthIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($tenthIssue);
 
         $eleventhIssue = new Issue();
@@ -273,8 +253,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $eleventhIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $eleventhIssue->setAssignee($this->getReference('usual-user'));
         $eleventhIssue->setReporter($this->getReference('admin-user'));
-        $eleventhIssue->addCollaborator($this->getReference('usual-user'));
-        $eleventhIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($eleventhIssue);
 
         $twelfthIssue = new Issue();
@@ -295,8 +273,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $twelfthIssue->setCreatedAt(new \DateTime('2016-07-01 10:11:31'));
         $twelfthIssue->setAssignee($this->getReference('usual-user'));
         $twelfthIssue->setReporter($this->getReference('admin-user'));
-        $twelfthIssue->addCollaborator($this->getReference('usual-user'));
-        $twelfthIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($twelfthIssue);
 
         $storyIssue = new Issue();
@@ -317,8 +293,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $storyIssue->setCreatedAt(new \DateTime('2016-07-01 19:11:31'));
         $storyIssue->setAssignee($this->getReference('usual-user'));
         $storyIssue->setReporter($this->getReference('admin-user'));
-        $storyIssue->addCollaborator($this->getReference('usual-user'));
-        $storyIssue->addCollaborator($this->getReference('admin-user'));
         $manager->persist($storyIssue);
 
         $openSubTask = new Issue();
@@ -339,9 +313,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $openSubTask->setCreatedAt(new \DateTime('2016-07-01 18:15:31'));
         $openSubTask->setAssignee($this->getReference('usual-user'));
         $openSubTask->setReporter($this->getReference('another-usual-user'));
-        $openSubTask->addCollaborator($this->getReference('usual-user'));
-        $openSubTask->addCollaborator($this->getReference('admin-user'));
-        $openSubTask->addCollaborator($this->getReference('another-usual-user'));
         $openSubTask->setParent($storyIssue);
         $manager->persist($openSubTask);
 
@@ -364,8 +335,6 @@ class LoadIssueData extends AbstractFixture implements DependentFixtureInterface
         $closedSubTask->setCreatedAt(new \DateTime('2016-07-04 12:11:31'));
         $closedSubTask->setAssignee($this->getReference('another-usual-user'));
         $closedSubTask->setReporter($this->getReference('admin-user'));
-        $closedSubTask->addCollaborator($this->getReference('another-usual-user'));
-        $closedSubTask->addCollaborator($this->getReference('admin-user'));
         $closedSubTask->setParent($storyIssue);
         $manager->persist($closedSubTask);
 
