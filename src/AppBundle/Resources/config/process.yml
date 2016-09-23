@@ -10,6 +10,11 @@ definitions:
                 object: $.data
                 method: addCollaborator
                 method_parameters: [$.data.assignee]
+            - @send_email_template:
+                from: $.data.reporter.email
+                to: $.data.assignee.email
+                template: 'issue_assigned_notification'
+                entity: $.data
     issue_reported:
         label: 'Issue Reported'
         enabled: true

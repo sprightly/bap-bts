@@ -1,0 +1,7 @@
+@name = issue_assigned_notification
+@entityName = AppBundle\Entity\Issue
+@subject = Issue Assigned
+
+<h1>Hello,  {{ entity.assignee.username }}!</h1>
+
+<p><a href="{{ path('app_issue_view', {'id': entity.getId}) }}">{{ entity.getSummary }}</a> assigned to you.</p>

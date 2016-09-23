@@ -3,6 +3,8 @@
 namespace AppBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
+use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtension;
+use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtensionAwareInterface;
 use Oro\Bundle\EntityExtendBundle\EntityConfig\ExtendScope;
 use Oro\Bundle\EntityExtendBundle\Migration\Extension\ExtendExtension;
 use Oro\Bundle\EntityExtendBundle\Migration\Extension\ExtendExtensionAwareInterface;
@@ -15,10 +17,17 @@ use Oro\Bundle\NoteBundle\Migration\Extension\NoteExtensionAwareInterface;
  * @SuppressWarnings(PHPMD.TooManyMethods)
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)
  */
-class AppBundleInstaller implements Installation, ExtendExtensionAwareInterface, NoteExtensionAwareInterface
+class AppBundleInstaller implements
+    Installation,
+    ExtendExtensionAwareInterface,
+    NoteExtensionAwareInterface,
+    ActivityExtensionAwareInterface
 {
     /** @var NoteExtension */
     protected $noteExtension;
+
+    /** @var ActivityExtension */
+    protected $activityExtension;
 
     protected $issueTableName = 'app_issue';
 
@@ -36,6 +45,14 @@ class AppBundleInstaller implements Installation, ExtendExtensionAwareInterface,
     public function setExtendExtension(ExtendExtension $extendExtension)
     {
         $this->extendExtension = $extendExtension;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setActivityExtension(ActivityExtension $activityExtension)
+    {
+        $this->activityExtension = $activityExtension;
     }
 
     /**
@@ -67,6 +84,7 @@ class AppBundleInstaller implements Installation, ExtendExtensionAwareInterface,
         $this->addIssueResolutionField($schema);
 
         $this->noteExtension->addNoteAssociation($schema, $this->issueTableName);
+        self::addActivityAssociations($schema, $this->activityExtension);
     }
 
 
@@ -252,5 +270,16 @@ class AppBundleInstaller implements Installation, ExtendExtensionAwareInterface,
                 'extend' => ['owner' => ExtendScope::OWNER_CUSTOM],
             ]
         );
+    }
+
+    /**
+     * Enables Email activity for User entity
+     *
+     * @param Schema $schema
+     * @param ActivityExtension $activityExtension
+     */
+    public static function addActivityAssociations(Schema $schema, ActivityExtension $activityExtension)
+    {
+        $activityExtension->addActivityAssociation($schema, 'oro_email', 'app_issue', true);
     }
 }
