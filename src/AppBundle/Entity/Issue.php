@@ -280,10 +280,16 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * Remove collaborator
      *
      * @param User $collaborator
+     *
+     * @return Issue
      */
     public function removeCollaborator(User $collaborator)
     {
-        $this->collaborators->removeElement($collaborator);
+        if ($this->getCollaborators()->contains($collaborator)) {
+            $this->collaborators->removeElement($collaborator);
+        }
+
+        return $this;
     }
 
     /**
@@ -329,7 +335,9 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     public function addChild(Issue $child)
     {
-        $this->children[] = $child;
+        if (! $this->getChild()->contains($child)) {
+            $this->children[] = $child;
+        }
 
         return $this;
     }
@@ -338,10 +346,16 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * Remove child
      *
      * @param Issue $child
+     *
+     * @return Issue
      */
     public function removeChild(Issue $child)
     {
-        $this->children->removeElement($child);
+        if ($this->getChild()->contains($child)) {
+            $this->children->removeElement($child);
+        }
+
+        return $this;
     }
 
     /**
@@ -349,7 +363,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getChildren()
+    public function getChild()
     {
         return $this->children;
     }
@@ -363,7 +377,9 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     public function addRelated(Issue $related)
     {
-        $this->related[] = $related;
+        if (! $this->getRelated()->contains($related)) {
+            $this->related[] = $related;
+        }
 
         return $this;
     }
@@ -372,10 +388,16 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * Remove related
      *
      * @param Issue $related
+     *
+     * @return Issue
      */
     public function removeRelated(Issue $related)
     {
-        $this->related->removeElement($related);
+        if ($this->getRelated()->contains($related)) {
+            $this->related->removeElement($related);
+        }
+
+        return $this;
     }
 
     /**

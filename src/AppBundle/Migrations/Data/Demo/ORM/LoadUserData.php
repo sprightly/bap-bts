@@ -49,8 +49,8 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
             $adminUser
                 ->setUsername('admin')
                 ->setEmail('admin@example.com')
-                ->setFirstName('Admin First Name')
-                ->setLastName('Admin Last Name')
+                ->setFirstName('John')
+                ->setLastName('Doe')
                 ->setEnabled(true);
             $adminUser
                 ->setOwner($businessUnit)
