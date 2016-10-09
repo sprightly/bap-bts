@@ -44,7 +44,7 @@
             ]
         }
     ] %}
-    {% if entity.children is not empty %}
+    {% if entity.child is not empty %}
         {% set dataBlocks = dataBlocks|merge([
             {
                 'title': 'Sub-tasks'|trans,

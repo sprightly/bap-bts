@@ -98,7 +98,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     private $collaborators;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Issue", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Issue", inversedBy="child")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * @var Issue
@@ -110,7 +110,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      *
      * @var ArrayCollection Issue[]
      */
-    private $children;
+    private $child;
 
     /**
      * @ORM\ManyToMany(targetEntity="Issue", inversedBy="related")
@@ -126,8 +126,8 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function __construct()
     {
         $this->collaborators = new ArrayCollection();
-        $this->children = new ArrayCollection();
-        $this->related = new ArrayCollection();
+        $this->child         = new ArrayCollection();
+        $this->related       = new ArrayCollection();
     }
 
     /**
@@ -336,7 +336,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function addChild(Issue $child)
     {
         if (! $this->getChild()->contains($child)) {
-            $this->children[] = $child;
+            $this->child[] = $child;
         }
 
         return $this;
@@ -352,7 +352,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function removeChild(Issue $child)
     {
         if ($this->getChild()->contains($child)) {
-            $this->children->removeElement($child);
+            $this->child->removeElement($child);
         }
 
         return $this;
@@ -365,7 +365,7 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      */
     public function getChild()
     {
-        return $this->children;
+        return $this->child;
     }
 
     /**

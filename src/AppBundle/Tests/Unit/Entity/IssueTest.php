@@ -32,6 +32,13 @@ class IssueTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
+    public function testExtend()
+    {
+        $this->assertTrue(
+            is_a($this->createIssueEntity(), '\AppBundle\Model\ExtendIssue')
+        );
+    }
+
     /**
      * @return Issue
      */

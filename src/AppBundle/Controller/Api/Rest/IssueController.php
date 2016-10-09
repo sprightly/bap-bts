@@ -30,6 +30,7 @@ class IssueController extends RestController
 
     /**
      * @inheritdoc
+     * @codeCoverageIgnore
      */
     public function getForm()
     {
@@ -37,6 +38,7 @@ class IssueController extends RestController
 
     /**
      * @inheritdoc
+     * @codeCoverageIgnore
      */
     public function getFormHandler()
     {

@@ -1,6 +1,11 @@
 <?php
 namespace AppBundle\Model;
 
+/**
+ * Class ExtendIssue
+ * @package AppBundle\Model
+ * @codeCoverageIgnore
+ */
 class ExtendIssue
 {
     /**

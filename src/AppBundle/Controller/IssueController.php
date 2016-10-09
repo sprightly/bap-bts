@@ -159,10 +159,10 @@ class IssueController extends Controller
             return $this->redirectToRoute('app_issue_index');
         }
 
-        return array(
+        return [
             'entity' => $issue,
             'form'   => $form->createView(),
-        );
+        ];
     }
 
     /**
