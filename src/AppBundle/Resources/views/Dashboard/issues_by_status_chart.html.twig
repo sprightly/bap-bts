@@ -1,7 +1,7 @@
 {% extends 'OroDashboardBundle:Dashboard:chartWidget.html.twig' %}
 
-{% set widgetName = 'issues_by_type_chart' %}
-{% set widgetTitle = 'app.dashboard.issues_by_type_chart.title'|trans %}
+{% set widgetName = 'issues_by_status_chart' %}
+{% set widgetTitle = 'app.dashboard.issues_by_status_chart.title'|trans %}
 
 {% block content %}
     {{ chartView.render()|raw }}

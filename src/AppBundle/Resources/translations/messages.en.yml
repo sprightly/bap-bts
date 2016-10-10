@@ -49,6 +49,6 @@ app:
         users_active_issue:
             title: 'Your active issues'
             description: 'This widget displays the users active issues'
-        issues_by_type_chart:
-            title: 'Issues by type chart'
-            description: 'Pie chart of issues by type.'
+        issues_by_status_chart:
+            title: 'Issues by status chart'
+            description: 'Pie chart of issues by status.'

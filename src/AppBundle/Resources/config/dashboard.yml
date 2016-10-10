@@ -7,7 +7,7 @@ oro_dashboard_config:
                 bundle: AppBundle
                 name: user_active_issues
             description: app.dashboard.users_active_issue.description
-        issues_by_type_chart:
-            label: app.dashboard.issues_by_type_chart.title
-            description: app.dashboard.issues_by_type_chart.description
-            route: app_issues_by_type_chart
+        issues_by_status_chart:
+            label: app.dashboard.issues_by_status_chart.title
+            description: app.dashboard.issues_by_status_chart.description
+            route: app_issues_by_status_chart

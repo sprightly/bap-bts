@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityRepository;
 use Oro\Bundle\EntityExtendBundle\Tools\ExtendHelper;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
+use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -166,20 +167,21 @@ class IssueController extends Controller
     }
 
     /**
-     * @Route("/dashboard/issues-by-status-chart", name="app_issues_by_type_chart")
-     * @Template("AppBundle:Dashboard:issues_by_type_chart.html.twig")
+     * @Route("/dashboard/issues-by-status-chart", name="app_issues_by_status_chart")
+     * @Template("AppBundle:Dashboard:issues_by_status_chart.html.twig")
      * @AclAncestor("app_issue_view")
      */
     public function issuesByTypeChartAction()
     {
         /* @var EntityRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Issue');
-        $query      = $repository->createQueryBuilder('issue')
-                                 ->select('count(issue.id) as value, type.name as label')
-                                 ->leftJoin('issue.type', 'type')
-                                 ->groupBy('issue.type')
-                                 ->getQuery();
-        $items      = $query->getResult();
+        $repository = $this->getDoctrine()->getRepository('OroWorkflowBundle:WorkflowItem');
+        $query = $repository->createQueryBuilder('wi');
+        $query->select('count(wi.entityId) AS value, ws.label AS label')
+           ->join('wi.currentStep', 'ws')
+           ->where($query->expr()->eq('wi.entityClass', ':entityClass'))
+           ->groupBy('ws.label')
+           ->setParameter('entityClass', Issue::class);
+        $items = $query->getQuery()->getArrayResult();
 
         $viewBuilder = $this->container->get('oro_chart.view_builder');
         $view        = $viewBuilder
@@ -190,7 +192,7 @@ class IssueController extends Controller
                     ],
                     $this
                         ->get('oro_chart.config_provider')
-                        ->getChartConfig('issues_by_type_chart')
+                        ->getChartConfig('issues_by_status_chart')
                 )
             )
             ->setArrayData($items)

@@ -51,12 +51,12 @@ class IssueControllerTest extends WebTestCase
         $this->client->request(
             'GET',
             $this->getUrl(
-                'app_issues_by_type_chart'
+                'app_issues_by_status_chart'
             )
         );
         $result = $this->client->getResponse();
         $this->assertHtmlResponseStatusCodeEquals($result, 200);
-        $this->assertContains('Issues by type chart', $result->getContent());
+        $this->assertContains('Issues by status chart', $result->getContent());
     }
 
     public function testCreateAction()
