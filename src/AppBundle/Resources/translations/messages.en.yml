@@ -29,6 +29,7 @@ app:
         type.label: 'Type'
         priority.label: 'Priority'
         resolution.label: 'Resolution'
+        status.label: 'Status'
         summary.label: 'Summary'
         code.label: 'Code'
         description.label: 'Description'

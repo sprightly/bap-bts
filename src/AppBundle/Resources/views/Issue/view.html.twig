@@ -20,6 +20,7 @@
                     {{ UI.renderProperty('app.issue.code.label'|trans, entity.code) }}
                     {{ UI.renderProperty('app.issue.summary.label'|trans, entity.summary) }}
                     {{ UI.renderProperty('app.issue.type.label'|trans, entity.type) }}
+                    {{ UI.renderProperty('app.issue.status.label'|trans, entity.workflowStepLabel) }}
                     {{ UI.renderProperty('app.issue.priority.label'|trans, entity.priority) }}
                     {% if entity.resolution is not empty %}
                         {{ UI.renderProperty('app.issue.resolution.label'|trans, entity.resolution) }}

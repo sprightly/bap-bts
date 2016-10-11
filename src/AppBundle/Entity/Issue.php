@@ -29,6 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          }
  *     }
  * )
+ * @ORM\EntityListeners("AppBundle\EventListener\IssueListener")
  */
 class Issue extends ExtendIssue implements DatesAwareInterface
 {
@@ -119,6 +120,11 @@ class Issue extends ExtendIssue implements DatesAwareInterface
      * @var ArrayCollection Issue[]
      */
     private $related;
+
+    /**
+     * @var string
+     */
+    private $workflowStepLabel;
 
     /**
      * Constructor
@@ -408,5 +414,17 @@ class Issue extends ExtendIssue implements DatesAwareInterface
     public function getRelated()
     {
         return $this->related;
+    }
+
+    public function getWorkflowStepLabel()
+    {
+        return $this->workflowStepLabel;
+    }
+
+    public function setWorkflowStepLabel($workflowStepLabel)
+    {
+        if (!$this->workflowStepLabel) {
+            $this->workflowStepLabel = $workflowStepLabel;
+        }
     }
 }

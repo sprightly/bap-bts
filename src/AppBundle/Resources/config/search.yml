@@ -53,3 +53,6 @@ AppBundle\Entity\Issue:
                     name:                   username
                     target_type:            text
                     target_fields:          [all_data]
+        -
+            name: workflowStepLabel
+            target_type: text

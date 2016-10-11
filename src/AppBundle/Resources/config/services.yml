@@ -5,3 +5,9 @@ services:
         arguments:
             - AppBundle\Entity\Issue
             - "@doctrine.orm.entity_manager"
+    app.issue_listener:
+        class: AppBundle\EventListener\IssueListener
+        arguments:
+            - '@oro_workflow.manager'
+        tags:
+            - { name: doctrine.orm.entity_listener }
